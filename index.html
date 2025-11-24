@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventXLBOLA</title>
+
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f6f7f8; }
+    header { display: flex; align-items: center; gap: 12px; background: #0040ff; padding: 12px 15px; color: #fff; font-size: 22px; font-weight: bold; }
+    header .logo { height: 45px; }
+
+    .container { max-width: 1100px; margin: auto; background: #fff; padding: 20px; display: flex; gap: 25px; flex-wrap: wrap; }
+    .left { flex: 1; min-width: 300px; }
+    .right { flex: 1.3; min-width: 300px; }
+
+    .big-img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+    .thumbnails img { width: 70px; margin: 5px; cursor: pointer; border-radius: 8px; border: 2px solid transparent; }
+    .thumbnails img:hover { border: 2px solid #41b548; }
+
+    .price { font-size: 30px; color: #41b548; font-weight: bold; margin: 12px 0; }
+    .variants button { padding: 10px; margin-right: 6px; margin-bottom: 6px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+    .variants button:hover { background: #41b548; color: #fff; }
+    .selected { background: #41b548; color: #fff !important; border-color: #2f9335; }
+
+    .buy-btn { width: 100%; padding: 15px; background: #41b548; color: #fff; font-size: 20px; border: none; border-radius: 8px; cursor: pointer; margin-top: 15px; }
+    .buy-btn:hover { background: #2f9335; }
+
+    .livechat { position: fixed; bottom: 20px; right: 20px; background: #0088cc; color: #fff; padding: 14px 18px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+    .rating { font-size: 15px; color: #ffa000; font-weight: bold; }
+    .sold { font-size: 14px; color: gray; margin-left: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+    <img class="logo" src="logo xlbola.png" alt="Logo Toko">
+</header>
+
+<div class="container">
+
+    <div class="left">
+        <img id="bigImage" class="big-img" src="Freebet.jpg" alt="Produk">
+        <div class="thumbnails">
+            <img onclick="changeImage(this)" src="Freebet.jpg">
+            <img onclick="changeImage(this)" src="event depo.jpg">
+            <img onclick="changeImage(this)" src="event rungkat.jpg">
+        </div>
+    </div>
+
+    <div class="right">
+        <h2>Event - Event XLBOLA</h2>
+
+        <span class="rating">⭐ 4.9</span>
+        <span class="sold">| 2RB+ terjual</span>
+
+        <p id="price" class="price">Rp 25.000</p>
+
+        <p>Untuk Claim wajib menggunakan KODE REFFERAL : <b id="reffCode">E9D18459</b>. Bergaransi!</p>
+
+        <h3>Pilih Varian:</h3>
+        <div class="variants">
+            <button onclick="selectVariant(this, 25000)">Freebet</button>
+            <button onclick="selectVariant(this, 30000)" class="selected">Event Depo</button>
+            <button onclick="selectVariant(this, 30000)">Event Rungkat</button>
+        </div>
+
+        <button id="buyBtn" class="buy-btn">BELI SEKARANG</button>
+    </div>
+
+</div>
+
+<a id="liveChatBtn" class="livechat" target="_blank">Chat Admin</a>
+
+<script>
+function changeImage(img) {
+    document.getElementById('bigImage').src = img.src;
+}
+function selectVariant(btn, priceValue) {
+    document.querySelectorAll(".variants button").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    document.getElementById("price").innerText = formatRupiah(priceValue);
+}
+function formatRupiah(angka) {
+    return 'Rp ' + angka.toLocaleString('id-ID');
+}
+
+// === AUTO REF SCRIPT ===
+(function() {
+    const url = new URL(window.location.href);
+    const paramRef = url.searchParams.get("ref") || url.searchParams.get("start");
+    const savedRef = localStorage.getItem("ref");
+
+    let finalRef = savedRef || paramRef || "E9D18459";
+    localStorage.setItem("ref", finalRef);
+
+    document.getElementById("reffCode").innerText = finalRef;
+
+    // Redirect beli sekarang
+    document.getElementById("buyBtn").onclick = function() {
+        window.location.href = `https://he1.me/1jRFS?ref=${finalRef}`;
+    };
+
+    // Referral ikut ke Telegram
+    document.getElementById("liveChatBtn").href = `https://t.me/Citraaulia43?start=${finalRef}`;
+})();
+</script>
+
+</body>
+</html>
